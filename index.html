@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="DoTo - Simple and clean task management app"
+    >
+
+    <title>DoTo - Task Manager</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ==================================================
+         APP LAYOUT
+    ================================================== -->
+
+    <div class="app">
+
+
+        <!-- ==================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <!-- Logo -->
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    ✓
+                </div>
+
+                <span>DoTo</span>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="sidebar-nav">
+
+                <button
+                    type="button"
+                    class="nav-link active"
+                    data-filter="all"
+                >
+
+                    <span class="nav-icon">
+                        📋
+                    </span>
+
+                    <span>
+                        All Tasks
+                    </span>
+
+                    <span
+                        class="nav-count"
+                        id="allTaskCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-link"
+                    data-filter="pending"
+                >
+
+                    <span class="nav-icon">
+                        ⏳
+                    </span>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <span
+                        class="nav-count"
+                        id="pendingTaskCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-link"
+                    data-filter="completed"
+                >
+
+                    <span class="nav-icon">
+                        ✓
+                    </span>
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <span
+                        class="nav-count"
+                        id="completedTaskCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- Sidebar bottom text -->
+
+            <div class="sidebar-footer">
+
+                <strong>
+                    Stay productive.
+                </strong>
+
+                <span>
+                    One task at a time.
+                </span>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- ==================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- ==================================================
+                 HEADER
+            ================================================== -->
+
+            <header class="header">
+
+                <div class="header-left">
+
+                    <!-- Mobile sidebar button -->
+
+                    <button
+                        type="button"
+                        class="mobile-menu-btn"
+                        id="mobileMenuBtn"
+                        aria-label="Open menu"
+                    >
+                        ☰
+                    </button>
+
+
+                    <div>
+
+                        <p class="welcome-text">
+                            Welcome back 👋
+                        </p>
+
+                        <h1>
+                            My Tasks
+                        </h1>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Opens task form -->
+
+                <button
+                    type="button"
+                    class="add-task-btn"
+                    id="openAddTaskBtn"
+                >
+
+                    <span>+</span>
+
+                    Add Task
+
+                </button>
+
+            </header>
+
+
+
+            <!-- ==================================================
+                 TASK STATISTICS
+            ================================================== -->
+
+            <section class="statistics">
+
+
+                <!-- Total -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Total Tasks
+                        </p>
+
+                        <h2 id="totalTaskCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Pending -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ⏳
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Pending
+                        </p>
+
+                        <h2 id="totalPendingCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Completed -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Completed
+                        </p>
+
+                        <h2 id="totalCompletedCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 TASK SECTION
+            ================================================== -->
+
+            <section class="tasks-section">
+
+
+                <!-- Tasks header -->
+
+                <div class="tasks-header">
+
+                    <div>
+
+                        <h2>
+                            Tasks
+                        </h2>
+
+                        <p>
+                            Manage your daily tasks
+                        </p>
+
+                    </div>
+
+
+                    <!-- Search + Filter -->
+
+                    <div class="task-tools">
+
+
+                        <!-- Search -->
+
+                        <div class="search-box">
+
+                            <span>
+                                🔍
+                            </span>
+
+                            <input
+                                type="search"
+                                id="searchInput"
+                                placeholder="Search tasks..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <!-- Filter -->
+
+                        <select
+                            id="taskFilter"
+                            class="task-filter"
+                        >
+
+                            <option value="all">
+                                All Tasks
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     DYNAMIC TASK CONTAINER
+
+                     IMPORTANT:
+                     Firebase मधून आलेले tasks
+                     JavaScript इथे dynamically render करेल.
+
+                     इथे task hardcode करू नका.
+                ================================================== -->
+
+                <div
+                    class="task-list"
+                    id="taskList"
+                ></div>
+
+
+
+                <!-- ==================================================
+                     EMPTY STATE
+
+                     Tasks नसतील तेव्हा JS हे दाखवेल.
+                ================================================== -->
+
+                <div
+                    class="empty-state"
+                    id="emptyState"
+                    hidden
+                >
+
+                    <div class="empty-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        No tasks found
+                    </h3>
+
+                    <p>
+                        Create your first task
+                        to get started.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="add-task-btn"
+                        id="emptyAddTaskBtn"
+                    >
+                        <span>+</span>
+                        Add Task
+                    </button>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     LOADING STATE
+
+                     Firebase data load होत असताना
+                     JS हे दाखवेल.
+                ================================================== -->
+
+                <div
+                    class="loading-state"
+                    id="loadingState"
+                    hidden
+                >
+
+                    <div class="spinner"></div>
+
+                    <p>
+                        Loading tasks...
+                    </p>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     ERROR STATE
+                ================================================== -->
+
+                <div
+                    class="error-state"
+                    id="errorState"
+                    hidden
+                >
+
+                    <div class="error-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Something went wrong
+                    </h3>
+
+                    <p id="errorMessage">
+                        Unable to load tasks.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="retry-btn"
+                        id="retryBtn"
+                    >
+                        Try Again
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         ADD / EDIT TASK MODAL
+
+         Same form आपण:
+         1. Add करण्यासाठी
+         2. Edit करण्यासाठी
+
+         दोन्ही ठिकाणी वापरणार आहोत.
+    ================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="taskModal"
+        hidden
+    >
+
+        <div class="task-modal">
+
+
+            <!-- Modal header -->
+
+            <div class="task-modal-header">
+
+                <div>
+
+                    <span class="form-label">
+                        TASK MANAGEMENT
+                    </span>
+
+                    <h2 id="taskModalTitle">
+                        Add New Task
+                    </h2>
+
+                    <p>
+                        Create a task and stay organized.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="close-modal-btn"
+                    id="closeTaskModalBtn"
+                    aria-label="Close form"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 TASK FORM
+            ================================================== -->
+
+            <form id="taskForm">
+
+
+                <!--
+                    Firebase document ID.
+
+                    Add करताना empty राहील.
+                    Edit करताना Firebase document ID
+                    इथे ठेवू.
+                -->
+
+                <input
+                    type="hidden"
+                    id="taskId"
+                >
+
+
+                <!-- Task title -->
+
+                <div class="form-group">
+
+                    <label for="taskTitle">
+
+                        Task Title
+
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        placeholder="e.g. Learn JavaScript DOM"
+                        maxlength="100"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <small
+                        class="form-error"
+                        id="titleError"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="taskDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="taskDescription"
+                        rows="4"
+                        maxlength="500"
+                        placeholder="Write a short description..."
+                    ></textarea>
+
+
+                    <div class="character-count">
+
+                        <span>
+                            Optional
+                        </span>
+
+                        <span id="descriptionCounter">
+                            0 / 500
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Priority + Due date -->
+
+                <div class="form-row">
+
+
+                    <!-- Priority -->
+
+                    <div class="form-group">
+
+                        <label for="taskPriority">
+                            Priority
+                        </label>
+
+                        <select id="taskPriority">
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                            <option
+                                value="medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Due date -->
+
+                    <div class="form-group">
+
+                        <label for="taskDueDate">
+                            Due Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="taskDueDate"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Status -->
+
+                <div class="form-group">
+
+                    <label for="taskStatus">
+                        Status
+                    </label>
+
+                    <select id="taskStatus">
+
+                        <option
+                            value="pending"
+                            selected
+                        >
+                            Pending
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Form actions -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        id="cancelTaskBtn"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-task-btn"
+                        id="saveTaskBtn"
+                    >
+                        Add Task
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         DELETE CONFIRMATION MODAL
+
+         Delete करण्याआधी user कडून confirmation घेण्यासाठी.
+    ================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="deleteModal"
+        hidden
+    >
+
+        <div class="delete-modal">
+
+            <div class="delete-icon">
+                🗑️
+            </div>
+
+            <h2>
+                Delete Task?
+            </h2>
+
+            <p>
+                Are you sure you want to delete
+                this task?
+            </p>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    id="cancelDeleteBtn"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="button"
+                    class="delete-btn"
+                    id="confirmDeleteBtn"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         TOAST MESSAGE
+
+         Add / Update / Delete success message
+         दाखवण्यासाठी.
+    ================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+        hidden
+    >
+
+        <span id="toastIcon">
+            ✓
+        </span>
+
+        <div>
+
+            <strong id="toastTitle">
+                Success
+            </strong>
+
+            <p id="toastMessage">
+                Task completed successfully.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="closeToastBtn"
+            aria-label="Close notification"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+
+         type="module" वापरतो कारण Firebase modules
+         import करण्यासाठी ES modules लागतील.
+    ================================================== -->
+
+    <script
+        type="module"
+        src="./js/app.js"
+    ></script>
+
+</body>
+
+</html>
